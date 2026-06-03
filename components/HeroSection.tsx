@@ -8,7 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
-const FRAME_COUNT = 192;
+const FRAME_COUNT = 240;
 
 // position: "top-left" appears under the navbar; "bottom-left" anchors to the bottom
 const chapters = [
@@ -49,8 +49,8 @@ const chapters = [
 type Chapter = (typeof chapters)[0];
 
 function getFrameUrl(index: number): string {
-  const padded = String(index).padStart(3, "0");
-  return `/images/herosection/frame_${padded}_delay-0.042s.avif`;
+  const padded = String(index + 1).padStart(3, "0");
+  return `/images/herosection/ezgif-frame-${padded}.webp`;
 }
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
