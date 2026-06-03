@@ -89,6 +89,39 @@ export default function HeroSection() {
   const [activeChapter, setActiveChapter] = useState(0);
   const [firstFrameReady, setFirstFrameReady] = useState(false);
 
+  const targetXRef = useRef(0);
+  const targetYRef = useRef(0);
+  const currentXRef = useRef(0);
+  const currentYRef = useRef(0);
+  const rafRef = useRef<number>(0);
+
+  // Cursor parallax — canvas moves opposite to mouse
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const dx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 2;
+      targetXRef.current = -dx * 24;
+      targetYRef.current = -dy * 24;
+    };
+
+    const tick = () => {
+      currentXRef.current += (targetXRef.current - currentXRef.current) * 0.06;
+      currentYRef.current += (targetYRef.current - currentYRef.current) * 0.06;
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.style.transform = `scale(1.06) translate(${currentXRef.current}px, ${currentYRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
