@@ -186,9 +186,6 @@ export default function HeroSection() {
           )}
         </AnimatePresence>
 
-        {/* Vignette — strong left edge + top/bottom */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/20 to-transparent" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" />
 
         {/* ── Chapter text block ── */}
         <AnimatePresence mode="wait">
@@ -207,7 +204,7 @@ export default function HeroSection() {
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ duration: 0.5, delay: 0.05, ease }}
-              className="absolute -left-4 top-0 bottom-0 w-[2px] bg-[#D90429] origin-top"
+              className="absolute -left-4 top-0 bottom-0 w-0.5 bg-f1-red origin-top"
             />
 
             {/* Eyebrow */}
@@ -215,7 +212,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.55, delay: 0.05, ease }}
-              className="mb-3 text-[10px] uppercase tracking-[0.25em] text-[#D90429]/70 font-semibold"
+              className="mb-3 text-[10px] uppercase tracking-[0.25em] text-f1-red/70 font-semibold"
             >
               {chapter.eyebrow}
             </motion.div>
@@ -230,7 +227,7 @@ export default function HeroSection() {
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3, ease }}
-              className="w-10 h-[1.5px] bg-[#D90429]/60 origin-left mb-4"
+              className="w-10 h-[1.5px] bg-f1-red/60 origin-left mb-4"
             />
 
             {/* Subtitle */}
@@ -269,7 +266,7 @@ export default function HeroSection() {
                   backgroundColor: i === activeChapter ? "#D90429" : "#ffffff",
                 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="w-[2px] rounded-full"
+                className="w-0.5 rounded-full"
               />
             </div>
           ))}
@@ -285,9 +282,9 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
             >
-              <div className="relative w-[1px] h-10 bg-white/[0.07] overflow-hidden">
+              <div className="relative w-px h-10 bg-white/[0.07] overflow-hidden">
                 <motion.div
-                  className="absolute top-0 left-0 w-full bg-[#D90429]"
+                  className="absolute top-0 left-0 w-full bg-f1-red"
                   animate={{ height: ["0%", "100%", "0%"], top: ["0%", "0%", "100%"] }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
                 />
