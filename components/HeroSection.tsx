@@ -200,7 +200,6 @@ export default function HeroSection() {
   });
 
   const chapter = chapters[activeChapter];
-  const isTop = chapter.position === "top-left";
 
   return (
     <div ref={containerRef} className="relative h-[600vh]">
@@ -228,21 +227,19 @@ export default function HeroSection() {
             animate={{ opacity: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, filter: "blur(6px)" }}
             transition={{ duration: 0.55, ease }}
-            className={`absolute left-8 sm:left-12 lg:left-16 z-10 max-w-xs sm:max-w-sm
-              ${isTop ? "top-28 sm:top-32" : "bottom-16 sm:bottom-20"}
-            `}
+            className="absolute right-8 sm:right-12 lg:right-16 bottom-16 sm:bottom-20 z-10 max-w-xs sm:max-w-sm"
           >
-            {/* Red left accent bar */}
+            {/* Red right accent bar */}
             <motion.div
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ duration: 0.5, delay: 0.05, ease }}
-              className="absolute -left-4 top-0 bottom-0 w-0.5 bg-f1-red origin-top"
+              className="absolute -right-4 top-0 bottom-0 w-0.5 bg-f1-red origin-top"
             />
 
             {/* Eyebrow */}
             <motion.div
-              initial={{ opacity: 0, x: -16 }}
+              initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.55, delay: 0.05, ease }}
               className="mb-3 text-[10px] uppercase tracking-[0.25em] text-f1-red/70 font-semibold"
@@ -275,23 +272,10 @@ export default function HeroSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Chapter progress pills — bottom right */}
-        <div className="absolute bottom-8 right-8 flex flex-col items-end gap-3 z-10">
-          {chapters.map((c, i) => (
+        {/* Chapter progress pills — bottom left */}
+        <div className="absolute bottom-8 left-8 flex flex-col items-start gap-3 z-10">
+          {chapters.map((_, i) => (
             <div key={i} className="flex items-center gap-2">
-              <AnimatePresence>
-                {i === activeChapter && (
-                  <motion.span
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 10 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-[9px] uppercase tracking-[0.2em] text-white/30"
-                  >
-                    {c.eyebrow}
-                  </motion.span>
-                )}
-              </AnimatePresence>
               <motion.div
                 animate={{
                   height: i === activeChapter ? 28 : 6,
