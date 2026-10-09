@@ -29,11 +29,10 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-[#050505] text-[#f0f0f0] overflow-x-hidden antialiased">
         {children}
-        {/* PinNote feedback widget. Its server runs on localhost, so it's only on for local dev:
-            PINNOTE_ENABLED=true in .env.development.local */}
-        {process.env.PINNOTE_ENABLED === "true" && (
+        {/* PinNote feedback widget. On by default; set PINNOTE_ENABLED=false to turn it off. */}
+        {process.env.PINNOTE_ENABLED !== "false" && (
           <Script
-            src="http://localhost:3000/embed.js"
+            src="https://pinnote-demo.vercel.app/embed.js"
             data-site="pn_a3vk8hIhxED9oOTh6xbnyY2R"
             strategy="afterInteractive"
             async
